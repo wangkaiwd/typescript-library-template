@@ -1,0 +1,14 @@
+.idea/*
+.vscode
+.nyc_output
+build
+/dist
+node_modules
+test
+src/**.js
+coverage
+*.log
+yarn.lock
+/website/uploads
+# Output of 'npm pack'
+*.tgz

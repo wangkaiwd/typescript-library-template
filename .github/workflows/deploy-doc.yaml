@@ -1,0 +1,28 @@
+name: Deploy to GitHub pages
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'docs/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate static docs files
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm run docs:build
+
+      - name: Init new repo in dist folder and commit generated files
+        run: |
+          cd docs/.vitepress/dist
+          git config --global user.email "1162486176@qq.com"
+          git config --global user.name "wangkaiwd"
+          git init
+          git add .
+          git commit -m 'chore(docs): update docs'
+          git push -f https://${{github.actor}}:${{github.token}}@github.com/${{ github.repository }}.git master:gh-pages
+          rm -rf .git
