@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+  "mainEntryPointFilePath": "<projectFolder>/build/types/index.d.ts",
+  "bundledPackages": [],
+  "compiler": {},
+  "apiReport": {
+    "enabled": false
+  },
+  "docModel": {
+    "enabled": false
+  },
+  "dtsRollup": {
+    "enabled": true,
+    "untrimmedFilePath": "<projectFolder>/build/<unscopedPackageName>.d.ts"
+  },
+  "tsdocMetadata": {
+    "enabled": false
+  },
+  "messages": {
+    "compilerMessageReporting": {
+      "default": {
+        "logLevel": "warning"
+      }
+    },
+    "extractorMessageReporting": {
+      "default": {
+        "logLevel": "warning",
+        "addToApiReportFile": false
+      },
+      "ae-forgotten-export": {
+        "logLevel": "none",
+        "addToApiReportFile": false
+      },
+      "ae-missing-release-tag": {
+        "logLevel": "none"
+      }
+    },
+    "tsdocMessageReporting": {
+      "default": {
+        "logLevel": "warning"
+      },
+      "tsdoc-undefined-tag": {
+        "logLevel": "none"
+      },
+      "tsdoc-escape-greater-than": {
+        "logLevel": "none"
+      },
+      "tsdoc-malformed-inline-tag": {
+        "logLevel": "none"
+      },
+      "tsdoc-escape-right-brace": {
+        "logLevel": "none"
+      },
+      "tsdoc-unnecessary-backslash": {
+        "logLevel": "none"
+      }
+    }
+  }
+}
