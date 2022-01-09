@@ -11,6 +11,13 @@ git clone git@github.com:wangkaiwd/typescript-library-template.git
 npm install
 ```
 
+之后执行`npm run dev`即可进入开发模式，在`examples`目录下写测试代码
+
+在发布之前要做如下修改：
+
+1. `package.json`中`name`字段更改为你的包名
+2. 在`.github/workflows/deploy-doc.yaml`中，将对应的`git`用户名邮箱改成要使用的信息
+
 #### 特性
 
 * 直接通过`npm install`安装依赖便可以直接进入开发
@@ -26,3 +33,6 @@ npm install
 #### Npm Scripts
 
 > [`ni`](https://github.com/antfu/ni)会自动帮我们使用正确的包管理器，可以让我们不用再记忆不同包管理器的命令，推荐使用
+
+* npm run dev
+* npm run build
