@@ -1,6 +1,7 @@
 ### TypeScript Library Template
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/wangkaiwd/typescript-library-template/Deploy%20to%20GitHub%20pages)
 
 方便`TypeScript`库作者直接书写代码，不用分心于各种各样的配置和`linter`工具
 
@@ -36,3 +37,4 @@ npm install
 
 * npm run dev
 * npm run build
+
