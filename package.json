@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-temp",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": false,
   "description": "",
   "main": "build/my-lib.cjs.js",
