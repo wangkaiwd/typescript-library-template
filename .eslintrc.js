@@ -37,7 +37,6 @@ module.exports = {
     'no-plusplus': 0,
     'guard-for-in': 0,
     'func-names': 0,
-    'import/no-unresolved': 0
   },
   settings: {
     'import/extensions': 'off',
