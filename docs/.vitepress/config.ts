@@ -6,6 +6,7 @@ export default defineConfig({
   base: '/typescript-library-template/',
   themeConfig: {
     // Type is `DefaultTheme.Config`
+    logo: '/logo.png',
     nav: [
       {
         text: 'GitHub',

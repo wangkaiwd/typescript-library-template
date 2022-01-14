@@ -35,6 +35,12 @@ npm install
 
 > [`ni`](https://github.com/antfu/ni)会自动帮我们使用正确的包管理器，可以让我们不用再记忆不同包管理器的命令，推荐使用
 
-* npm run dev
-* npm run build
+> 有关打包和发布的具体细节，可以阅读[`rollup`打包`TypeScript`库文件并发布到`npm`]()
 
+* npm run dev：使用`rollup`进行打包，会使用`watch`模式观察源代码改动并且会生成`sourcemap`方便调试
+* npm run build：打包代码，会分别支持`commonjs`，`esModule`以及`script`引入
+* npm run docs:dev: 启动本地服务器，使用`vitepress`进行文档开发
+* npm run docs:build: 文档打包
+* npm run test: 执行测试用例
+* npm run release: 发布代码到`npm`并提交最新更改到`GitHub`
+* npm run cm: 利用`cz`执行`git commit` 
