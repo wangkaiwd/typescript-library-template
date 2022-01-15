@@ -13,6 +13,15 @@ export default defineConfig({
         link: 'https://github.com/wangkaiwd/typescript-library-template',
       },
     ],
-    sidebar: false
+    sidebar: [
+      {
+        text: '快速上手',
+        link: '/'
+      },
+      {
+        text: '打包和发布',
+        link: '/tutorial'
+      }
+    ]
   },
 });

@@ -27,6 +27,6 @@ export default {
   ],
   plugins: [typescript({
     useTsconfigDeclarationDir: true,
-    tsconfigOverride: { compilerOptions: { sourceMap: !isProd, declaration: !isProd } }
+    tsconfigOverride: { compilerOptions: { sourceMap: !isProd } }
   })],
 };
