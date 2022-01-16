@@ -109,7 +109,7 @@ export default {
   "build": "rollup -c rollup.config.ts --entryFileNames MODE:prod"
 }
 ```
-执行`npm run dev`便可以进入开发模式了
+执行`npm run dev`便可以进入开发模式，书写代码并实时编译。
 
 ### 发布代码到`npm`
 
