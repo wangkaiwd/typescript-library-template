@@ -24,6 +24,9 @@
       "eslint"
     ]
   },
+  "files": [
+    "build"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wangkaiwd/typescript-library-template.git"
