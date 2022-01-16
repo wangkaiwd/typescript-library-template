@@ -1,5 +1,7 @@
 ## 打包`TypeScript`库文件并发布到`npm`
 
+![](https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/Colorful%20Brushstrokes%20Artists%20and%20Illustrators%20Collection%20YouTube%20Intro.png)
+
 本文讲解了如何使用`rollup`打包`TypeScript`代码以及发布打包文件到`npm`，并最终自动化发布过程。涉及到的技术栈如下：
 
 * `rollup`
