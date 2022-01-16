@@ -5,11 +5,15 @@ export default defineConfig({
   description: 'Write TypeScript Library without extra ',
   base: '/typescript-library-template/',
   head: [
-    ['link', { rel: 'icon', type: 'image/x-icon', href: '/logo.png' }],
+    ['link', {
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: 'https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/81249231_padded_logo.png'
+    }],
   ],
   themeConfig: {
     // Type is `DefaultTheme.Config`
-    logo: '/logo.png',
+    logo: 'https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/81249231_padded_logo.png',
     nav: [
       {
         text: 'GitHub',
