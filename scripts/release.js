@@ -27,10 +27,10 @@ const dryRun = args.dryRun;
 const npmRegistry = 'https://registry.npmjs.org';
 const run = (cmd, args, options) => execa(cmd, args, { stdio: 'inherit', ...options });
 
-const ifDryRun = (cmd, args, options) => dryRun ? console.log(`${cmd  } ${  args.join(' ')}`) : run(cmd, args, options);
+const ifDryRun = (cmd, args, options) => dryRun ? console.log(`${cmd} ${args.join(' ')}`) : run(cmd, args, options);
 const inc = (i) => semver.inc(currentVersion, i, preId);
 const commitChanges = async (version) => {
-  const { stdout } = await ifDryRun('git', ['diff'], { stdio: 'pipe' });
+  const { stdout } = await run('git', ['diff'], { stdio: 'pipe' });
   if (stdout) {
     step('\nCommit changes...');
     await ifDryRun('git', ['add', '.']);
@@ -56,7 +56,9 @@ const rollupTypes = async () => {
 const build = async () => {
   await fs.rm(resolve('build'), { force: true, recursive: true });
   await ifDryRun('npm', ['run', 'build']);
-  await rollupTypes();
+  if (!dryRun) {
+    await rollupTypes();
+  }
 };
 const doRelease = async (version) => {
   step('\nBuild package...');

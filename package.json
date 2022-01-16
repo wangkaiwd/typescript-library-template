@@ -9,8 +9,8 @@
   "scripts": {
     "prepare": "husky install",
     "cm": "cz",
-    "dev": "rollup -w -c rollup.config.ts --entryFileNames MODE:dev",
-    "build": "rollup -c rollup.config.ts --entryFileNames MODE:prod",
+    "dev": "rollup -w -c rollup.config.ts --entryFileNames --environment MODE:dev",
+    "build": "rollup -c rollup.config.ts --entryFileNames --environment MODE:prod",
     "genlog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",

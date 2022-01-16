@@ -191,19 +191,19 @@ export default {
 整个过程中我们会用到以下工具库：
 
 * [`execa`](https://github.com/sindresorhus/execa): 通过`Node.js`子进程来执行命令行代码
-* `enquirer`: 可以让`Node.js`与命令行进行交互，如输入或者选择内容
+* [`enquirer`](https://github.com/enquirer/enquirer): 可以让`Node.js`与命令行进行交互，如输入或者选择内容
 * [`chalk`](https://github.com/chalk/chalk):  设置终端字符串样式
-* `minimist`: 解析命令行参数
-* `semver`:
+* [`minimist`](https://github.com/substack/minimist): 解析命令行参数
+* [`semver`](https://github.com/npm/node-semver): 处理语义化版本相关的逻辑
 
-核心逻辑便是通过`execa`执行命令行代码，一步步完成我们的发布过程，其间会通过`enquirer`来让用户选择或输入新的版本号。整个过程提供了`dry`模式，在命令行中执行`npm run release -- --dryRun`
+核心逻辑便是通过[`execa`](https://github.com/sindresorhus/execa) 执行命令行代码，一步步完成我们的发布过程，其间会通过[`enquirer`](https://github.com/enquirer/enquirer) 来让用户选择或输入新的版本号。整个过程提供了`dry`模式，在命令行中执行`npm run release -- --dryRun`
 便可以通过日志来查看到发布的整个流程，而不会触发真正对应的操作。
+
+![](https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/20220116191521.png)
 
 想要查看源代码的小伙伴可以点击这里。
 
 最终我们再命令行执行`npm run release`，根据提示输入或选择新的版本号，等到命令行提示发布成功，便可以在`npm`中看到我们发布的包了。
-
-效果如下：
 
 ### 结语
 
