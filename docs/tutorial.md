@@ -199,7 +199,7 @@ export default {
 4. 提交`changelog.md`的最新改动到`git`
 5. `npm publish --reg=https://registry.npmjs.org`使用`npm`官方源来发布代码
 6. 将最新的改动以及新创建的`tag`提交到`github`
-   * `git push`：推送代码到远程仓库
+   * `git push`: 推送代码到远程仓库
    * `git push origin tagName`: `tag`需要单独提交
 
 整个过程中我们会用到以下工具库：
