@@ -37,9 +37,6 @@ const commitChanges = async (version) => {
 const build = async () => {
   await fs.rm(resolve('build'), { force: true, recursive: true });
   await ifDryRun('npm', ['run', 'build']);
-  if (!dryRun) {
-    // await rollupTypes();
-  }
 };
 const doRelease = async (version) => {
   step('\nBuild package...');
