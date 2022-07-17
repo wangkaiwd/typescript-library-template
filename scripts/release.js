@@ -5,10 +5,6 @@ const semver = require('semver');
 
 const step = (msg) => console.log(chalk.cyan(msg));
 const execa = require('execa');
-const {
-  Extractor,
-  ExtractorConfig
-} = require('@microsoft/api-extractor');
 const path = require('path');
 const fs = require('fs/promises');
 const pkg = require('../package.json');
@@ -37,27 +33,12 @@ const commitChanges = async (version) => {
     await ifDryRun(`git`, ['commit', '-m', `chore(release): release v${version}`]);
   }
 };
-const rollupTypes = async () => {
-  const extractorConfig = ExtractorConfig.loadFileAndPrepare(resolve('api-extractor.json'));
-  // Invoke API Extractor
-  const extractorResult = Extractor.invoke(extractorConfig, {
-    localBuild: true,
-    showVerboseMessages: true
-  });
-  if (extractorResult.succeeded) {
-    console.log(`API Extractor completed successfully`);
-    await fs.rm(resolve('build/types'), { force: true, recursive: true });
-  } else {
-    console.error(`API Extractor completed with ${extractorResult.errorCount} errors`
-      + ` and ${extractorResult.warningCount} warnings`);
-    process.exitCode = 1;
-  }
-};
+
 const build = async () => {
   await fs.rm(resolve('build'), { force: true, recursive: true });
   await ifDryRun('npm', ['run', 'build']);
   if (!dryRun) {
-    await rollupTypes();
+    // await rollupTypes();
   }
 };
 const doRelease = async (version) => {
