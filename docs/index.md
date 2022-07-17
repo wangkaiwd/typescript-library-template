@@ -2,6 +2,7 @@
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/wangkaiwd/typescript-library-template/Deploy%20to%20GitHub%20pages)
+![license](  https://img.shields.io/github/license/wangkaiwd/typescript-library-template)
 
 A template project that make create a typescript library easily.
 
@@ -25,10 +26,11 @@ set `script src` correctly
 * Build source code with [`rollup`](https://github.com/rollup/rollup)
 * Tests use [`jest`](https://github.com/facebook/jest) to make sure code quality
 * Automatic generate `changelog.md` and `GitHub Release`, using [`commitizen`](https://github.com/commitizen/cz-cli)
-* Intercept commit that have problems, using `Husky`,`lint-staged` combine with `git hook`
+* Intercept commit that have problems, using [`Husky`](https://github.com/typicode/husky)
+  ,[`lint-staged`](https://github.com/okonet/lint-staged) combine with `git hook`
 * Support auto publish script, you can run `npm run release` when publish
 * Using [`vitepress`](https://github.com/vuejs/vitepress) write document
-* `GitHub Action` continuous integration
+* [`GitHub Action`](https://docs.github.com/en/actions) continuous integration
 
 ### Npm Scripts
 
