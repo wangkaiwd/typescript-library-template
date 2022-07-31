@@ -21,9 +21,10 @@
     /* Disallow inconsistently-cased references to the same file. */
     "declaration": true,
     "declarationDir": "build/types",
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "resolveJsonModule": true
   },
   "include": [
-    "lib/**/*.ts"
+    "lib/**/*.ts",
   ]
 }

@@ -38,9 +38,16 @@
     "url": "https://github.com/wangkaiwd/typescript-library-template/issues"
   },
   "homepage": "https://github.com/wangkaiwd/typescript-library-template#readme",
+  "dependencies": {
+  },
+  "peerDependencies": {
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
     "@types/jest": "^28.1.6",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
@@ -48,6 +55,7 @@
     "commitizen": "^4.2.4",
     "conventional-changelog-cli": "^2.2.2",
     "enquirer": "^2.3.6",
+    "esbuild": "^0.14.51",
     "eslint": "^8.20.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -59,7 +67,7 @@
     "prettier": "2.7.1",
     "rollup": "^2.77.0",
     "rollup-plugin-dts": "^4.2.2",
-    "rollup-plugin-typescript2": "^0.32.1",
+    "rollup-plugin-esbuild": "^4.9.1",
     "semver": "^7.3.7",
     "ts-jest": "^28.0.7",
     "tslib": "^2.4.0",
