@@ -1,7 +1,4 @@
-import resolve from '@rollup/plugin-node-resolve';
-import commonjs from '@rollup/plugin-commonjs';
-import json from '@rollup/plugin-json';
-import esbuild from 'rollup-plugin-esbuild';
+import typescript from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
 import pkg from './package.json';
 
@@ -37,12 +34,10 @@ export default [
         sourcemap: !isProd
       },
     ],
-    plugins: [
-      resolve(),
-      commonjs(),
-      json({ preferConst: true }),
-      esbuild()
-    ],
+    plugins: [typescript({
+      useTsconfigDeclarationDir: true,
+      tsconfigOverride: { compilerOptions: { sourceMap: !isProd } }
+    })],
   },
   {
     input: 'build/types/index.d.ts',

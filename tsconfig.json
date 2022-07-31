@@ -25,6 +25,6 @@
     "resolveJsonModule": true
   },
   "include": [
-    "lib/**/*.ts",
+    "lib/**/*"
   ]
 }
