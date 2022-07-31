@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-temp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "",
   "main": "build/my-lib.cjs.js",
@@ -38,10 +38,8 @@
     "url": "https://github.com/wangkaiwd/typescript-library-template/issues"
   },
   "homepage": "https://github.com/wangkaiwd/typescript-library-template#readme",
-  "dependencies": {
-  },
-  "peerDependencies": {
-  },
+  "dependencies": {},
+  "peerDependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
