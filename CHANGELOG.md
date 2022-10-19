@@ -1,3 +1,26 @@
+## [1.1.1](https://github.com/wangkaiwd/typescript-library-template/compare/v1.0.2...v1.1.1) (2022-10-19)
+
+
+### chore
+
+* move scripts position ([30eee70](https://github.com/wangkaiwd/typescript-library-template/commit/30eee70e75ddee3b62192494b64c007268b183a0))
+
+
+### Features
+
+* config prettier ([e7466c8](https://github.com/wangkaiwd/typescript-library-template/commit/e7466c85140d7375afd0199a4165f899e66a1fc2))
+* update some dep ([6f16e8f](https://github.com/wangkaiwd/typescript-library-template/commit/6f16e8f3a9c0209abbe4b0aad500ecd8ce9b6f74))
+
+
+### BREAKING CHANGES
+
+* * build with @rollup/plugin-typescript
+* validate git hooks with simple git hooks
+* execute scripts with tsx
+* test with vitest
+
+
+
 ## [1.0.2](https://github.com/wangkaiwd/typescript-library-template/compare/v1.0.1...v1.0.2) (2022-07-31)
 
 
