@@ -2,7 +2,7 @@
 .vscode
 .nyc_output
 build
-/dist
+dist
 node_modules
 test
 src/**.js

@@ -1,52 +1,78 @@
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
+import json from '@rollup/plugin-json';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import dts from 'rollup-plugin-dts';
-import pkg from './package.json';
-
-const mode = process.env.MODE;
-const isProd = mode === 'prod';
+import { OutputOptions, RollupOptions } from 'rollup';
+import path from 'path';
+import { fileURLToPath } from 'node:url';
+import pkg from './package.json' assert { type: 'json' };
 
 const external = [
-  ...Object.keys(pkg.dependencies),
   ...Object.keys(pkg.devDependencies),
-  ...Object.keys(pkg.peerDependencies),
 ];
 
-export default [
-  {
-    input: `lib/index.ts`,
-    external,
-    output: [
-      {
-        file: pkg.main,
-        exports: 'named',
-        format: 'cjs',
-        sourcemap: !isProd
-      },
-      {
-        file: pkg.module,
-        format: 'es',
-        sourcemap: !isProd
-      },
-      {
-        file: 'build/my-lib.global.js',
-        name: 'MyLib',
-        format: 'iife',
-        sourcemap: !isProd
-      },
-    ],
-    plugins: [typescript({
-      useTsconfigDeclarationDir: true,
-      tsconfigOverride: { compilerOptions: { sourceMap: !isProd } }
-    })],
-  },
-  {
-    input: 'build/types/index.d.ts',
-    output: [
-      {
-        file: 'build/my-lib.d.ts',
-        format: 'es'
-      }
-    ],
-    plugins: [dts()],
-  },
-];
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const createOutput = (isDev: boolean) => {
+  const output: OutputOptions[] = [
+    {
+      file: pkg.module,
+      format: 'es',
+      sourcemap: isDev
+    },
+  ];
+  if (!isDev) {
+    output.push({
+      file: pkg.main,
+      exports: 'named',
+      format: 'cjs',
+      sourcemap: isDev
+    });
+    output.push({
+      file: 'dist/index.global.js',
+      name: 'MyLib',
+      format: 'iife',
+      sourcemap: isDev
+    });
+  }
+  return output;
+};
+
+export default (commandArgs: any): RollupOptions[] => {
+  const isDev = !!commandArgs.watch;
+  const isProd = !isDev;
+  const rollupOptions: RollupOptions[] = [
+    {
+      input: path.resolve(__dirname, 'src/index.ts'),
+      external,
+      output: createOutput(isDev),
+      plugins: [
+        nodeResolve(),
+        commonjs(),
+        json(),
+        typescript({
+          compilerOptions: {
+            sourceMap: isDev,
+            // https://github.com/Swatinem/rollup-plugin-dts/issues/147
+            declarationDir: isDev ? undefined : path.resolve(__dirname, './types'),
+            declaration: isProd
+          }
+        })
+      ],
+    }
+  ];
+  if (isProd) {
+    rollupOptions.push({
+      input: './dist/types/index.d.ts',
+      output: [
+        {
+          file: 'dist/index.d.ts',
+          format: 'es'
+        }
+      ],
+      plugins: [dts()]
+    });
+  }
+  return rollupOptions;
+};

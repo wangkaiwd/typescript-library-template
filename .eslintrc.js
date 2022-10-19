@@ -37,6 +37,8 @@ module.exports = {
     'no-plusplus': 0,
     'guard-for-in': 0,
     'func-names': 0,
+    'no-console': 0,
+    'no-underscore-dangle': 0
   },
   settings: {
     'import/extensions': 'off',
