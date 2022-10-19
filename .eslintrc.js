@@ -48,5 +48,5 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: [".husky/**", "build/**/*"],
+  ignorePatterns: [".husky/**", "dist/**/*"],
 };
