@@ -11,11 +11,11 @@
     "dev": "pnpm build-bundle -w",
     "build-bundle": "rimraf dist && rollup -c --configPlugin typescript",
     "build": "pnpm build-bundle && rimraf dist/types",
-    "genlog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "docs": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "release": "tsx scripts/release.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "genlog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "lint-staged": {
     "**/*": [
@@ -67,7 +67,7 @@
     "minimist": "^1.2.6",
     "prettier": "2.7.1",
     "rimraf": "^3.0.2",
-    "rollup": "3.2.0",
+    "rollup": "^3.2.3",
     "rollup-plugin-dts": "^5.0.0",
     "semver": "^7.3.7",
     "simple-git-hooks": "^2.8.1",
