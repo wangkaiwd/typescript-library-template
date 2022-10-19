@@ -1,3 +1,14 @@
+## [1.0.2](https://github.com/wangkaiwd/typescript-library-template/compare/v1.0.1...v1.0.2) (2022-07-31)
+
+
+### Features
+
+* change rollup config ([990e1cf](https://github.com/wangkaiwd/typescript-library-template/commit/990e1cf4120eac3ceee4941df6c3f713e9258258))
+* delete api extractor json ([4031f94](https://github.com/wangkaiwd/typescript-library-template/commit/4031f9467ad26064cdf78bbadb238e6a230b3284))
+* rollback typescript2 plugin,because esbuild can't generate declaration files ([b3a1399](https://github.com/wangkaiwd/typescript-library-template/commit/b3a13996a08513f0c5b3f3f0c9a3a3ff2955d39c))
+
+
+
 ## [1.0.1](https://github.com/wangkaiwd/typescript-library-template/compare/v1.0.0...v1.0.1) (2022-07-17)
 
 
