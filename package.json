@@ -10,7 +10,6 @@
     "preinstall": "npx only-allow pnpm",
     "dev": "pnpm build-bundle -w",
     "build-bundle": "rimraf dist && rollup -c --configPlugin typescript",
-    "test1": "rm -rf dist && rollup -c --configPlugin typescript",
     "build": "pnpm build-bundle && rimraf dist/types",
     "genlog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "docs": "vitepress dev docs",
@@ -19,9 +18,11 @@
     "test": "vitest"
   },
   "lint-staged": {
-    "*": [
-      "prettier --cache --write",
-      "eslint --cache"
+    "**/*": [
+      "prettier --cache --write --ignore-unknown"
+    ],
+    "src/**/*.ts": [
+      "eslint --cache --fix"
     ]
   },
   "simple-git-hooks": {

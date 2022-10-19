@@ -12,3 +12,4 @@ yarn.lock
 /website/uploads
 # Output of 'npm pack'
 *.tgz
+.eslintcache
