@@ -1,19 +1,24 @@
 {
   "name": "@sppk/my-lib",
   "version": "2.0.4",
-  "description": "",
-  "module": "dist/index.es.js",
-  "main": "dist/index.cjs.js",
-  "types": "dist/index.d.ts",
-  "type": "module",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "dev": "pnpm build-bundle -w",
     "build-bundle": "rimraf dist && rollup -c --configPlugin typescript",
     "build": "pnpm build-bundle && rimraf dist/types"
   },
+  "description": "",
+  "module": "dist/index.es.js",
+  "main": "dist/index.cjs.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    "import": "./dist/index.es.js",
+    "require": "./dist/index.cjs.js",
+    "types": "./dist/index.d.ts"
+  },
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
   },
