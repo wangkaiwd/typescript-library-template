@@ -13,7 +13,7 @@
     "docs:build": "vitepress build docs",
     "release": "tsx scripts/release.ts",
     "test": "vitest",
-    "genlog": "conventional-changelog -p angular -i packages/my-lib/CHANGELOG.md -s -r 0 --commit-path ./packages/my-lib"
+    "genlog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 --commit-path ./packages/my-lib"
   },
   "lint-staged": {
     "**/*": [
