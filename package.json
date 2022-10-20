@@ -1,21 +1,19 @@
 {
   "name": "ts-lib-temp",
-  "version": "1.1.1",
-  "private": false,
+  "private": true,
   "description": "",
   "module": "dist/index.es.js",
   "main": "dist/index.cjs.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "pnpm build-bundle -w",
-    "build-bundle": "rimraf dist && rollup -c --configPlugin typescript",
-    "build": "pnpm build-bundle && rimraf dist/types",
+    "dev": "pnpm -F './packages/*' dev",
+    "build": "pnpm -F './packages/*' build",
     "docs": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "release": "tsx scripts/release.ts",
     "test": "vitest",
-    "genlog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "genlog": "conventional-changelog -p angular -i packages/my-lib/CHANGELOG.md -s -r 0 --commit-path ./packages/my-lib"
   },
   "lint-staged": {
     "**/*": [

@@ -38,6 +38,7 @@ module.exports = {
     "func-names": 0,
     "no-console": 0,
     "no-underscore-dangle": 0,
+    "import/no-relative-packages": 0,
   },
   settings: {
     "import/extensions": "off",
@@ -48,5 +49,5 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: [".husky/**", "dist/**/*"],
+  ignorePatterns: [".husky/**", "dist/**/*", "playground/**/*"],
 };

@@ -5,7 +5,7 @@ build
 dist
 node_modules
 test
-src/**.js
+packages/my-lib/src/**.js
 coverage
 *.log
 yarn.lock

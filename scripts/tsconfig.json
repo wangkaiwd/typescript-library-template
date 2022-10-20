@@ -1,9 +1,7 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../packages/my-lib/tsconfig.base.json",
   "compilerOptions": {
     "target": "ESNext"
   },
-  "include": [
-    "."
-  ]
+  "include": ["."]
 }
