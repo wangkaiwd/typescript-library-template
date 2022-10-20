@@ -1,5 +1,7 @@
 ## TS Lib Template
 
+<img src="https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/81249231_padded_logo.png" width="300" align="center">
+
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/wangkaiwd/typescript-library-template/Deploy%20to%20GitHub%20pages)
 ![license](https://img.shields.io/github/license/wangkaiwd/typescript-library-template)
@@ -16,7 +18,7 @@ git clone git@github.com:wangkaiwd/typescript-library-template.git
 pnpm install
 ```
 
-Then run `pnpm run dev` to develop.
+Then run `pnpm dev` to develop.
 
 If you want to test your code in browser environment, you can write test code in `playground` directory
 
