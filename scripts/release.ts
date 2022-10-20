@@ -54,7 +54,14 @@ const doRelease = async (version: string) => {
   step("\nBump version...");
   await ifDryRun(
     `npm`,
-    ["version", version, "-m", `chore(version): bump version to v${version}`],
+    [
+      "version",
+      version,
+      "-m",
+      `chore(version): bump version to v${version}`,
+      "git-tag-version",
+      false,
+    ],
     { cwd }
   );
 
@@ -65,6 +72,7 @@ const doRelease = async (version: string) => {
   await ifDryRun("npm", ["publish", "--reg", npmRegistry], { cwd });
 
   step("\nPush to github...");
+  await ifDryRun("git", ["tag", `v${version}`]);
   await ifDryRun("git", ["push"]);
   await ifDryRun(`git`, ["push", "origin", `v${version}`]);
   console.log(chalk.green(` Release successfully ${pkg.name}@${version}`));
