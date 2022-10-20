@@ -1,6 +1,6 @@
 {
   "name": "@sppk/my-lib",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "",
   "module": "dist/index.es.js",
   "main": "dist/index.cjs.js",
@@ -13,6 +13,9 @@
     "dev": "pnpm build-bundle -w",
     "build-bundle": "rimraf dist && rollup -c --configPlugin typescript",
     "build": "pnpm build-bundle && rimraf dist/types"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {},
   "keywords": [],
