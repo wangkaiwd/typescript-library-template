@@ -59,8 +59,7 @@ const doRelease = async (version: string) => {
       version,
       "-m",
       `chore(version): bump version to v${version}`,
-      "git-tag-version",
-      false,
+      "--no-git-tag-version",
     ],
     { cwd }
   );
@@ -115,5 +114,5 @@ const main = async () => {
   }
 };
 main().catch((err) => {
-  console.log("error", err);
+  console.error(err);
 });
