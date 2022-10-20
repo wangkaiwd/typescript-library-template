@@ -1,6 +1,8 @@
 ## TS Lib Template
 
-<img src="https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/81249231_padded_logo.png" width="300" align="center">
+<p align="center">
+  <img src="https://raw.githubusercontent.com/wangkaiwd/drawing-bed/master/81249231_padded_logo.png" height="200">
+</p>
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/wangkaiwd/typescript-library-template/Deploy%20to%20GitHub%20pages)
