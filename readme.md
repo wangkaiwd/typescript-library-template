@@ -6,6 +6,9 @@
 
 A template project that make create a typescript library easily.
 
+> If you wanna known about more detail about build and publish, you can read
+> in [here](https://zhuanlan.zhihu.com/p/458363563).
+
 ### Usage
 
 ```shell
@@ -13,10 +16,9 @@ git clone git@github.com:wangkaiwd/typescript-library-template.git
 pnpm install
 ```
 
-Then run `npm run dev` to develop.
+Then run `pnpm run dev` to develop.
 
-If you want to test your code in browser environment, you can write test code in `example` directory and
-set `script src` correctly
+If you want to test your code in browser environment, you can write test code in `playground` directory
 
 ### Feature
 
