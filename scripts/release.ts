@@ -9,9 +9,9 @@ import pkg from "../packages/my-lib/package.json";
 import { fileURLToPath } from "url";
 
 const pkgName = "my-lib";
-
 const args = minimist(process.argv.slice(2));
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const cwd = path.resolve(__dirname, "../packages", pkgName);
 const step = (msg: string) => console.log(chalk.cyan(msg));
 const currentVersion = pkg.version;
 const preId = semver.prerelease(currentVersion)?.[0];
@@ -52,20 +52,17 @@ const doRelease = async (version: string) => {
   step("\nBuild package...");
   await build();
   step("\nBump version...");
-  await ifDryRun(`npm`, [
-    "version",
-    version,
-    "-m",
-    `chore(version): bump version to v${version}`,
-  ]);
+  await ifDryRun(
+    `npm`,
+    ["version", version, "-m", `chore(version): bump version to v${version}`],
+    { cwd }
+  );
 
   step("\nGenerate changelog...");
   await ifDryRun("npm", ["run", "genlog"]);
   await commitChanges(version);
   step("\nPublish package to npm...");
-  await ifDryRun("npm", ["publish", "--reg", npmRegistry], {
-    cwd: path.resolve(__dirname, "../packages", pkgName),
-  });
+  await ifDryRun("npm", ["publish", "--reg", npmRegistry], { cwd });
 
   step("\nPush to github...");
   await ifDryRun("git", ["push"]);

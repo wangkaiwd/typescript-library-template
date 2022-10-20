@@ -1,11 +1,14 @@
 {
   "name": "my-lib",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "",
   "module": "dist/index.es.js",
   "main": "dist/index.cjs.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "pnpm build-bundle -w",
     "build-bundle": "rimraf dist && rollup -c --configPlugin typescript",
