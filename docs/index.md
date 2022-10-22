@@ -15,8 +15,15 @@ A template project that make create a typescript library easily.
 
 ### Usage
 
+Use [degit](https://github.com/Rich-Harris/degit) clone template to your local machine.
+
 ```shell
 npx degit git@github.com:wangkaiwd/typescript-library-template.git my-lib
+```
+
+Start project:
+
+```shell
 cd my-lib
 pnpm install
 pnpm dev
