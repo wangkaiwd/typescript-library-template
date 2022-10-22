@@ -5,8 +5,8 @@ import chalk from "chalk";
 import semver, { ReleaseType } from "semver";
 import path from "path";
 import fs from "fs/promises";
-import pkg from "../packages/my-lib/package.json";
 import { fileURLToPath } from "url";
+import pkg from "../packages/my-lib/package.json";
 
 const pkgName = "my-lib";
 const args = minimist(process.argv.slice(2));
@@ -108,6 +108,7 @@ const main = async () => {
     type: "confirm",
     name: "goOn",
     message: `Release v${newVersion}. Confirm ?`,
+    initial: true,
   });
   if (goOn) {
     await doRelease(newVersion);
