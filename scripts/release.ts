@@ -65,16 +65,17 @@ const doRelease = async (version: string) => {
   );
 
   step("\nGenerate changelog...");
-  const conventionalChangelogArgs = [
+  const changelogArgs = [
     "conventional-changelog",
     "-p",
     "angular",
+    "-i",
     "CHANGELOG.md",
     "-s",
     "--commit-path",
     ".",
   ];
-  await ifDryRun("npx", conventionalChangelogArgs, { cwd });
+  await ifDryRun("npx", changelogArgs, { cwd });
   await commitChanges(version);
   step("\nPublish package to npm...");
   await ifDryRun("npm", ["publish", "--reg", npmRegistry], { cwd });
