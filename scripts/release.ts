@@ -1,118 +1,84 @@
-import execa, { Options } from "execa";
-import enquirer from "enquirer";
-import minimist from "minimist";
+import path from "node:path";
+import prompts, { PromptObject } from "prompts";
+import { inc, ReleaseType } from "semver";
 import chalk from "chalk";
-import semver, { ReleaseType } from "semver";
-import path from "path";
-import fs from "fs/promises";
-import pkg from "../packages/my-lib/package.json";
-import { fileURLToPath } from "url";
+import { __dirname, bumpPkgsVersion, getPkgsInfo, run, step } from "./utils";
 
-const pkgName = "my-lib";
-const args = minimist(process.argv.slice(2));
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const cwd = path.resolve(__dirname, "../packages", pkgName);
-const step = (msg: string) => console.log(chalk.cyan(msg));
-const currentVersion = pkg.version;
-const preId = semver.prerelease(currentVersion)?.[0];
-const incrementVersions: string[] = [
-  "patch",
-  "minor",
-  "major",
-  // https://stackoverflow.com/questions/44908159/how-to-define-an-array-with-conditional-elements
-  ...(preId ? ["prepatch", "preminor", "premajor", "prerelease"] : []),
-];
-const resolve = (...args: string[]) => path.resolve(__dirname, "../", ...args);
-const dry = args.dry;
-const npmRegistry = "https://registry.npmjs.org";
-const run = (cmd: string, args: string[], options: Options) =>
-  execa(cmd, args, { stdio: "inherit", ...options });
+const { version: targetVersion } = getPkgsInfo();
 
-const ifDryRun = (cmd: string, args: any[], options: Options = {}) =>
-  dry ? console.log(`${cmd} ${args.join(" ")}`) : run(cmd, args, options);
-const inc = (i: ReleaseType) => semver.inc(currentVersion, i, preId as string);
-const commitChanges = async (version: string) => {
+const increments: ReleaseType[] = ["major", "minor", "patch"];
+
+const bumpPkgsVersionWithInfo = async (incVersion: string) => {
+  await bumpPkgsVersion(incVersion);
+};
+
+const generateChangelog = async () => {
+  const changelogArgs = [
+    "conventional-changelog",
+    "-p",
+    "angular",
+    "-i",
+    "CHANGELOG.md",
+    "-s",
+  ];
+  await run("npx", changelogArgs, { cwd: path.resolve(__dirname, "..") });
+};
+
+const isGitClean = async () => {
   const { stdout } = await run("git", ["diff"], { stdio: "pipe" });
   if (stdout) {
-    step("\nCommit changes...");
-    await ifDryRun("git", ["add", "."]);
-    await ifDryRun(`git`, [
-      "commit",
-      "-m",
-      `chore(release): release v${version}`,
-    ]);
+    throw Error(chalk.yellow("You have changes which have not commit!"));
   }
 };
 
-const build = async () => {
-  await fs.rm(resolve("build"), { force: true, recursive: true });
-  await ifDryRun("npm", ["run", "build"]);
+const commitChanges = async (incVersion: string) => {
+  await run("git", ["add", "."]);
+  await run("git", ["commit", "-m", `chore(release): release v${incVersion}`]);
+  await run("git", ["tag", `v${incVersion}`]);
 };
-const doRelease = async (version: string) => {
-  step("\nBuild package...");
-  await build();
-  step("\nBump version...");
-  await ifDryRun(
-    `npm`,
-    [
-      "version",
-      version,
-      "-m",
-      `chore(version): bump version to v${version}`,
-      "--no-git-tag-version",
-    ],
-    { cwd }
-  );
 
-  step("\nGenerate changelog...");
-  await ifDryRun("npm", ["run", "genlog"]);
-  await commitChanges(version);
-  step("\nPublish package to npm...");
-  await ifDryRun("npm", ["publish", "--reg", npmRegistry], { cwd });
-
-  step("\nPush to github...");
-  await ifDryRun("git", ["tag", `v${version}`]);
-  await ifDryRun("git", ["push"]);
-  await ifDryRun(`git`, ["push", "origin", `v${version}`]);
-  console.log(chalk.green(` Release successfully ${pkg.name}@${version}`));
+const pushWithTag = async (incVersion: string) => {
+  await run("git", ["push"]);
+  await run("git", ["push", "origin", `v${incVersion}`]);
 };
+
 const main = async () => {
-  const answer = await enquirer.prompt<{ version: string }>({
+  step("\nDetect changes ..");
+  await isGitClean();
+
+  const question: PromptObject = {
     type: "select",
-    name: "version",
-    message: "Select release type",
-    choices: incrementVersions
-      .map((type) => {
-        const versionNumber = inc(type as ReleaseType)!;
-        return { message: `${type} ${versionNumber}`, name: versionNumber };
-      })
-      .concat({ message: "custom", name: "custom" }),
-  });
-  let newVersion = answer.version;
-  if (newVersion === "custom") {
-    const { custom } = await enquirer.prompt<{ custom: string }>({
-      type: "input",
-      name: "custom",
-      message: "Please input new version",
-      initial: currentVersion,
-      validate(value: string) {
-        if (semver.valid(value)) {
-          return true;
-        }
-        return "Please input a valid package version";
-      },
-    });
-    newVersion = custom;
-  }
-  const { goOn } = await enquirer.prompt<{ goOn: boolean }>({
+    name: "releaseType",
+    message: "Pick a new version",
+    choices: increments.map((item) => ({
+      title: item,
+      value: item,
+      description: inc(targetVersion, item)!,
+    })),
+  };
+  const { releaseType } = await prompts(question);
+  const incVersion = inc(targetVersion, releaseType)!;
+  const { confirm } = await prompts({
     type: "confirm",
-    name: "goOn",
-    message: `Release v${newVersion}. Confirm ?`,
+    name: "confirm",
+    message: `New version is ${incVersion}, continue ?`,
+    initial: false,
   });
-  if (goOn) {
-    await doRelease(newVersion);
-  }
+  if (!confirm) return;
+
+  step("\nBump packages version ...");
+  await bumpPkgsVersionWithInfo(incVersion);
+
+  step("\nGenerate changelog ..");
+  await generateChangelog();
+
+  step("\nCommit changes ...");
+  await commitChanges(incVersion);
+
+  step("\nPush to remote ...");
+  await pushWithTag(incVersion);
 };
+
 main().catch((err) => {
   console.error(err);
 });

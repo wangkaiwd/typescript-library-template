@@ -1,25 +1,24 @@
 {
   "name": "ts-lib-temp",
   "private": true,
-  "description": "",
-  "module": "dist/index.es.js",
-  "main": "dist/index.cjs.js",
-  "types": "dist/index.d.ts",
+  "version": "2.0.4",
+  "description": "typescript library template",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "postinstall": "simple-git-hooks",
     "dev": "pnpm -F './packages/*' dev",
     "build": "pnpm -F './packages/*' build",
-    "docs": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
     "release": "tsx scripts/release.ts",
     "test": "vitest",
-    "genlog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 --commit-path @sppk/my-lib"
+    "publish-ci": "tsx scripts/publishCI.ts",
+    "docs": "vitepress dev docs",
+    "docs:build": "vitepress build docs"
   },
   "lint-staged": {
     "**/*": [
       "prettier --cache --write --ignore-unknown"
     ],
-    "src/**/*.ts": [
+    "(scripts|packages)/**/*.ts": [
       "eslint --cache --fix"
     ]
   },
@@ -50,20 +49,22 @@
     "@rollup/plugin-typescript": "8.3.3",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.11.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/prompts": "^2.4.1",
     "@types/semver": "^7.3.12",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "chalk": "^4.1.2",
     "conventional-changelog-cli": "^2.2.2",
-    "enquirer": "^2.3.6",
     "eslint": "^8.20.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "execa": "^5.1.1",
+    "execa": "^6.1.0",
     "lint-staged": "^13.0.3",
     "minimist": "^1.2.6",
     "prettier": "2.7.1",
+    "prompts": "^2.4.2",
     "rimraf": "^3.0.2",
     "rollup": "^3.2.3",
     "rollup-plugin-dts": "^5.0.0",
@@ -74,5 +75,8 @@
     "typescript": "^4.7.4",
     "vitepress": "^0.22.4",
     "vitest": "^0.24.3"
+  },
+  "dependencies": {
+    "fs-extra": "^10.1.0"
   }
 }
