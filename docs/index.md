@@ -15,14 +15,26 @@ A template project that make create a typescript library easily.
 
 ### Usage
 
+Use [degit](https://github.com/Rich-Harris/degit) clone template to your local machine.
+
 ```shell
-git clone git@github.com:wangkaiwd/typescript-library-template.git
-pnpm install
+npx degit git@github.com:wangkaiwd/typescript-library-template.git my-lib
 ```
 
-Then run `pnpm dev` to develop.
+Start project:
 
-If you want to test your code in browser environment, you can write test code in `playground` directory
+```shell
+cd my-lib
+pnpm install
+pnpm dev
+```
+
+If you want to test your code in browser environment, you can try your code in `playground` directory
+
+```shell
+cd playground/vue-demo
+pnpm dev
+```
 
 ### Feature
 
