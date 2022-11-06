@@ -1,7 +1,7 @@
 {
   "name": "ts-lib-temp",
   "private": true,
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "typescript library template",
   "scripts": {
     "preinstall": "npx only-allow pnpm",

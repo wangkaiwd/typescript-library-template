@@ -1,6 +1,6 @@
 {
   "name": "@sppk/my-lib",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "scripts": {
     "dev": "pnpm build-bundle -w",
     "build-bundle": "rimraf dist && rollup -c --configPlugin typescript",
