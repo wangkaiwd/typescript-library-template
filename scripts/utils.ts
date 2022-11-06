@@ -5,12 +5,19 @@ import { execa, Options } from "execa";
 import fse from "fs-extra";
 import chalk from "chalk";
 import minimist from "minimist";
+import semver from "semver/preload";
+
+interface ReleaseOptions {
+  dry: boolean;
+}
 
 export const PKG_JSON = "package.json";
 export const NPM_REGISTRY = "https://registry.npmjs.org/";
 export const __dirname = path.dirname(fileURLToPath(import.meta.url));
+export const args = minimist<ReleaseOptions>(process.argv.slice(2));
 
-export const args = minimist(process.argv.slice(2));
+const isDry = args.dry;
+
 export const getPkgsInfo = () => {
   const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const pkgDir = path.resolve(__dirname, "../packages");
@@ -32,6 +39,11 @@ export const getPkgsInfo = () => {
 export const run = (cmd: string, args: string[], options: Options = {}) =>
   execa(cmd, args, { stdio: "inherit", ...options });
 
+const dryRun = (cmd: string, args: string[], options: Options = {}) =>
+  console.log(chalk.blue(`${cmd} ${args.join(" ")}`), options || "");
+
+export const runIfNotDry = isDry ? dryRun : run;
+
 export const bumpPkgsVersion = async (incVersion: string) => {
   const { pkgFilenames } = getPkgsInfo();
   const rootPkgFilename = path.resolve(__dirname, "../");
@@ -47,5 +59,8 @@ export const bumpPkgsVersion = async (incVersion: string) => {
   });
   return Promise.all(promises);
 };
+
+export const validVersion = (newVersion: string, targetVersion: string) =>
+  semver.valid(newVersion) && semver.gt(newVersion, targetVersion);
 
 export const step = (message: string) => console.log(chalk.cyan(message));
